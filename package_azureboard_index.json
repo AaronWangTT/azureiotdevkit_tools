@@ -805,17 +805,23 @@
             {
               "host": "x86_64-apple-darwin",
               "url": "https://github.com/VSChina/azureiotdevkit_tools/releases/download/1.0/gcc-arm-none-eabi-5_4-2016q3.tar.gz",
-              "archiveFileName": "gcc-arm-none-eabi-5_4-2016q3.tar.gz"
+              "archiveFileName": "gcc-arm-none-eabi-5_4-2016q3.tar.gz",
+              "checksum": "SHA-256:7dbda8ffa5ad725ac595ff0af2f568132be8dbbad0b083835e02cc46d539a358",
+              "size": "109135672"
             },
             {
               "host": "x86_64-pc-linux-gnu",
               "url": "https://github.com/VSChina/azureiotdevkit_tools/releases/download/1.0/gcc-arm-none-eabi-6-2017-q1-linux64.tar.gz",
-              "archiveFileName": "gcc-arm-none-eabi-6-2017-q1-linux64.tar.gz"
+              "archiveFileName": "gcc-arm-none-eabi-6-2017-q1-linux64.tar.gz",
+              "checksum": "SHA-256:48e71153fae405fe771b3b339111404cd4e363eff4316b15cfe9835758da0221",
+              "size": "112772785"
             },
             {
               "host": "i686-pc-linux-gnu",
               "url": "https://github.com/VSChina/azureiotdevkit_tools/releases/download/1.0/gcc-arm-none-eabi-5_4-2016q3-linux32.tar.gz",
-              "archiveFileName": "gcc-arm-none-eabi-5_4-2016q3-linux32.tar.gz"
+              "archiveFileName": "gcc-arm-none-eabi-5_4-2016q3-linux32.tar.gz",
+              "checksum": "SHA-256:b2157115f0a649d5d85b6d4f6cc6f27338bd21639bf099047a99e2c4866a2801",
+              "size": "106442419"
             }
           ]
         },
@@ -826,12 +832,16 @@
             {
               "host": "i686-linux-gnu",
               "url": "https://github.com/VSChina/azureiotdevkit_tools/releases/download/1.0/openocd-linux32-0.10.0.tar",
-              "archiveFileName": "openocd-linux32-0.10.0.tar"
+              "archiveFileName": "openocd-linux32-0.10.0.tar",
+              "checksum": "SHA-256:c85f0ea48136ed09b03ecc5a6861dc4be77e012defe5f8e574f22f9f86ab52c1",
+              "size": "27729920"
             },
             {
               "host": "x86_64-pc-linux-gnu",
               "url": "https://github.com/VSChina/azureiotdevkit_tools/releases/download/1.0/openocd-linux64-0.10.0.tar",
-              "archiveFileName": "openocd-linux64-0.10.0.tar"
+              "archiveFileName": "openocd-linux64-0.10.0.tar",
+              "checksum": "SHA-256:c85f0ea48136ed09b03ecc5a6861dc4be77e012defe5f8e574f22f9f86ab52c1",
+              "size": "27729920"
             },
             {
               "host": "i686-mingw32",
@@ -843,7 +853,9 @@
             {
               "host": "i386-apple-darwin11",
               "url": "https://github.com/VSChina/azureiotdevkit_tools/releases/download/1.0/openocd-0.10.0.tar.gz",
-              "archiveFileName": "openocd-0.10.0.tar.gz"
+              "archiveFileName": "openocd-0.10.0.tar.gz",
+              "checksum": "SHA-256:eda3b03919cc0ffb70e7de9c877092a0311aaaa4e1532937e9f86ac1863fe526",
+              "size": "6124274"
             }
           ]
         }

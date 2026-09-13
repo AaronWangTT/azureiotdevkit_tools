@@ -1,0 +1,100 @@
+name: Validate package index
+
+on:
+  push:
+    paths:
+      - package_azureboard_index.json
+      - tools/Test-PackageIndex.ps1
+      - .github/workflows/validate-package-index.yml
+  pull_request:
+    paths:
+      - package_azureboard_index.json
+      - tools/Test-PackageIndex.ps1
+      - .github/workflows/validate-package-index.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-2022
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate index metadata
+        shell: pwsh
+        run: ./tools/Test-PackageIndex.ps1
+
+      - name: Clean-install newest Core and compile smoke sketch
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $index = Get-Content -Raw package_azureboard_index.json | ConvertFrom-Json
+          $package = @($index.packages | Where-Object name -eq 'AZ3166')
+          if ($package.Count -ne 1) {
+              throw "Expected one AZ3166 package, found $($package.Count)."
+          }
+          $platform = @($package[0].platforms | Sort-Object { [version]$_.version } -Descending)[0]
+
+          $repository = $env:GITHUB_REPOSITORY
+          $revision = $env:GITHUB_SHA
+          if ($env:GITHUB_EVENT_NAME -eq 'pull_request') {
+              $event = Get-Content -Raw $env:GITHUB_EVENT_PATH | ConvertFrom-Json
+              $repository = $event.pull_request.head.repo.full_name
+              $revision = $event.pull_request.head.sha
+          }
+          $indexUrl = "https://raw.githubusercontent.com/$repository/$revision/package_azureboard_index.json"
+
+          $arduinoVersion = '1.8.19'
+          $archive = Join-Path $env:RUNNER_TEMP "arduino-$arduinoVersion-windows.zip"
+          Invoke-WebRequest `
+              -Uri "https://downloads.arduino.cc/arduino-$arduinoVersion-windows.zip" `
+              -OutFile $archive
+          Expand-Archive -LiteralPath $archive -DestinationPath $env:RUNNER_TEMP
+          $arduinoRoot = Join-Path $env:RUNNER_TEMP "arduino-$arduinoVersion"
+          $arduino = Join-Path $arduinoRoot 'arduino_debug.exe'
+          if ($arduinoRoot.Length -gt 80) {
+              throw "Arduino root is too deep for the legacy Windows GCC toolchain: $arduinoRoot"
+          }
+          New-Item -ItemType Directory -Path (Join-Path $arduinoRoot 'portable') -Force | Out-Null
+          $platformId = "AZ3166:$($platform.architecture):$($platform.version)"
+          & $arduino `
+              --install-boards $platformId `
+              --pref "boardsmanager.additional.urls=$indexUrl" `
+              --save-prefs
+          if ($LASTEXITCODE -ne 0) {
+              throw "Board Manager could not install $platformId."
+          }
+
+          $dataRoot = Join-Path $arduinoRoot 'portable/packages'
+          $coreRoot = Join-Path $dataRoot "AZ3166/hardware/$($platform.architecture)/$($platform.version)"
+          if (-not (Test-Path -LiteralPath (Join-Path $coreRoot 'platform.txt') -PathType Leaf)) {
+              throw "$platformId installed without platform.txt."
+          }
+          foreach ($dependency in @($platform.toolsDependencies)) {
+              $toolRoot = Join-Path $dataRoot "$($dependency.packager)/tools/$($dependency.name)/$($dependency.version)"
+              $toolFile = Get-ChildItem -LiteralPath $toolRoot -File -Recurse -ErrorAction SilentlyContinue |
+                  Select-Object -First 1
+              if (-not $toolFile) {
+                  throw "$platformId installed without tool $($dependency.name) $($dependency.version)."
+              }
+          }
+
+          $sketchbook = Join-Path $env:RUNNER_TEMP 'sketchbook'
+          $sketchRoot = Join-Path $sketchbook 'Smoke'
+          New-Item -ItemType Directory -Path $sketchRoot -Force | Out-Null
+          Set-Content `
+              -LiteralPath (Join-Path $sketchRoot 'Smoke.ino') `
+              -Encoding Ascii `
+              -Value @('void setup() {}', 'void loop() {}')
+          & $arduino `
+              --verify `
+              --board 'AZ3166:stm32f4:MXCHIP_AZ3166' `
+              --pref "sketchbook.path=$sketchbook" `
+              (Join-Path $sketchRoot 'Smoke.ino')
+          if ($LASTEXITCODE -ne 0) {
+              throw "$platformId installed but could not compile a smoke sketch."
+          }
