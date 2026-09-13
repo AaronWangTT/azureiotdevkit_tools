@@ -6,6 +6,11 @@ It retains the archived Microsoft releases and adds maintained AZ3166 Core
 releases whose artifacts are published from
 [AaronWangTT/devkit-sdk](https://github.com/AaronWangTT/devkit-sdk).
 
+The fork's `master` branch preserves the archived
+[VSChina/azureiotdevkit_tools](https://github.com/VSChina/azureiotdevkit_tools)
+history and does not receive maintained package-index changes. Submit those
+changes through pull requests targeting the default `maintenance` branch.
+
 ## Validation
 
 Run the structural check after editing the index:
