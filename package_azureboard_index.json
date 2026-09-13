@@ -758,7 +758,37 @@
                                         "version":  "0.10.0"
                                     }
                                 ]
-      }      
+                    },
+                    {
+                      "name":  "MXChip - Microsoft Azure IoT Developer Kit",
+                      "architecture":  "stm32f4",
+                      "version":  "2.0.1",
+                      "category":  "Contributed",
+                      "help":  {
+                             "online":  "https://github.com/AaronWangTT/devkit-sdk"
+                           },
+                      "url":  "https://github.com/AaronWangTT/devkit-sdk/releases/download/2.0.1/AZ3166-2.0.1.zip",
+                      "archiveFileName":  "AZ3166-2.0.1.zip",
+                      "checksum":  "SHA-256:9908715a6d1815dbd41899b6c7cfaf65d25cfa6fcd775b096bad0d11a259e462",
+                      "size":  "5502668",
+                      "boards":  [
+                             {
+                               "name":  "MXChip - Microsoft Azure IoT Developer Kit AZ3166"
+                             }
+                           ],
+                      "toolsDependencies":  [
+                                  {
+                                    "packager":  "AZ3166",
+                                    "name":  "arm-none-eabi-gcc",
+                                    "version":  "5_4-2016q3"
+                                  },
+                                  {
+                                    "packager":  "AZ3166",
+                                    "name":  "openocd",
+                                    "version":  "0.10.0"
+                                  }
+                                ]
+                    }
       ],
       "tools": [
         {
