@@ -11,10 +11,6 @@ on:
   pull_request:
     branches:
       - maintenance
-    paths:
-      - package_azureboard_index.json
-      - tools/Test-PackageIndex.ps1
-      - .github/workflows/validate-package-index.yml
   workflow_dispatch:
 
 permissions:

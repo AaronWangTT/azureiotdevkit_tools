@@ -15,6 +15,13 @@ index change on a feature branch, then merge it through review. No workflow in
 this repository edits the index, publishes a release, or updates a consumer
 repository. Automatic workflows only validate proposed and merged index content.
 
+The `maintenance` branch requires pull requests, an up-to-date successful
+`validate` check, and resolved review conversations. The rule applies to
+administrators and blocks force pushes and branch deletion, but does not require
+an approving review. The validation workflow intentionally runs for every pull
+request targeting `maintenance`; do not add pull-request path filters while its
+job is a required status check.
+
 ## Validation
 
 Run the structural check after editing the index:

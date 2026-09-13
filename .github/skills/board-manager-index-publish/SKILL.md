@@ -173,6 +173,8 @@ After explicit authorization:
    It validates metadata, performs a clean Arduino IDE 1.8.19 Board Manager
    installation, checks compiler and OpenOCD installation, and compiles a smoke
    sketch.
+  Because its `validate` job is a required branch check, the pull-request
+  workflow must remain free of path filters so every PR receives a conclusion.
 5. Merge only after review and successful required checks.
 6. Wait for the workflow triggered by the push to `maintenance` and require it
    to pass for the exact merged commit.
