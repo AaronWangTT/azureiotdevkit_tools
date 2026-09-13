@@ -798,7 +798,9 @@
             {
               "host": "i686-mingw32",
               "archiveFileName": "gcc-arm-none-eabi-5_4-2016q3-20160926-win32.zip",
-              "url": "https://github.com/VSChina/azureiotdevkit_tools/releases/download/1.0/gcc-arm-none-eabi-5_4-2016q3-20160926-win32.zip"
+              "url": "https://github.com/VSChina/azureiotdevkit_tools/releases/download/1.0/gcc-arm-none-eabi-5_4-2016q3-20160926-win32.zip",
+              "checksum": "SHA-256:2c9cf891fa0f594d07a97508e2fb0ac05dddf9a68f13d831200a29e6b5ac7011",
+              "size": "121781693"
             },
             {
               "host": "x86_64-apple-darwin",
@@ -834,7 +836,9 @@
             {
               "host": "i686-mingw32",
               "url": "https://github.com/VSChina/azureiotdevkit_tools/releases/download/1.0/openocd-0.10.0-32.zip",
-              "archiveFileName": "openocd-0.10.0-32.zip"
+              "archiveFileName": "openocd-0.10.0-32.zip",
+              "checksum": "SHA-256:1c66db9a08a8a96a6305ea6f1ba15152b618cf0263c0ebda5cfc2d896b2e167d",
+              "size": "2751074"
             },
             {
               "host": "i386-apple-darwin11",
