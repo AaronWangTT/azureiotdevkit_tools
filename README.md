@@ -10,6 +10,10 @@ The fork's `master` branch preserves the archived
 [VSChina/azureiotdevkit_tools](https://github.com/VSChina/azureiotdevkit_tools)
 history and does not receive maintained package-index changes. Submit those
 changes through pull requests targeting the default `maintenance` branch.
+Adding a maintained Core entry is intentionally manual: prepare and validate the
+index change on a feature branch, then merge it through review. No workflow in
+this repository edits the index, publishes a release, or updates a consumer
+repository. Automatic workflows only validate proposed and merged index content.
 
 ## Validation
 
